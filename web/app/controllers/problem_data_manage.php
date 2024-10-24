@@ -498,15 +498,25 @@ EOD
 	$rejudge_form->submit_button_config['text'] = '重测该题';
 	$rejudge_form->submit_button_config['smart_confirm'] = '';
 	
-	$rejudgege97_form = new UOJForm('rejudgege97');
-	$rejudgege97_form->handle = function() {
+	$rejudgege87_form = new UOJForm('rejudgege87');
+	$rejudgege87_form->handle = function() {
 		global $problem;
-		rejudgeProblemGe97($problem);
+		rejudgeProblemGe87($problem);
 	};
-	$rejudgege97_form->succ_href = "/submissions?problem_id={$problem['id']}";
-	$rejudgege97_form->submit_button_config['class_str'] = 'btn btn-danger btn-block';
-	$rejudgege97_form->submit_button_config['text'] = '重测 >=97 的程序';
-	$rejudgege97_form->submit_button_config['smart_confirm'] = '';
+	$rejudgege87_form->succ_href = "/submissions?problem_id={$problem['id']}";
+	$rejudgege87_form->submit_button_config['class_str'] = 'btn btn-danger btn-block';
+	$rejudgege87_form->submit_button_config['text'] = '重测 >=87 的程序';
+	$rejudgege87_form->submit_button_config['smart_confirm'] = '';
+
+	$rejudgege90_form = new UOJForm('rejudgege90');
+	$rejudgege90_form->handle = function() {
+		global $problem;
+		rejudgeProblemGe90($problem);
+	};
+	$rejudgege90_form->succ_href = "/submissions?problem_id={$problem['id']}";
+	$rejudgege90_form->submit_button_config['class_str'] = 'btn btn-danger btn-block';
+	$rejudgege90_form->submit_button_config['text'] = '重测 >=90 的程序';
+	$rejudgege90_form->submit_button_config['smart_confirm'] = '';
 	
 	$view_type_form = new UOJForm('view_type');
 	$view_type_form->addVSelect('view_content_type',

@@ -164,8 +164,11 @@
 	function rejudgeProblemAC($problem) {
 		DB::query("update submissions set judge_time = NULL , result = '' , score = NULL , status = 'Waiting Rejudge' where problem_id = ${problem['id']} and score = 100");
 	}
-	function rejudgeProblemGe97($problem) {
-		DB::query("update submissions set judge_time = NULL , result = '' , score = NULL , status = 'Waiting Rejudge' where problem_id = ${problem['id']} and score >= 97");
+	function rejudgeProblemGe87($problem) {
+		DB::query("update submissions set judge_time = NULL , result = '' , score = NULL , status = 'Waiting Rejudge' where problem_id = ${problem['id']} and score >= 87");
+	}
+	function rejudgeProblemGe90($problem) {
+		DB::query("update submissions set judge_time = NULL , result = '' , score = NULL , status = 'Waiting Rejudge' where problem_id = ${problem['id']} and score >= 90");
 	}
 	function rejudgeSubmission($submission) {
 		DB::query("update submissions set judge_time = NULL , result = '' , score = NULL , status = 'Waiting Rejudge' where id = ${submission['id']}");
