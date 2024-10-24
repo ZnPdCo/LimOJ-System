@@ -215,7 +215,7 @@ EOD
 	$best_limit = $best ? $best['used_time'] : null;
 ?>
 <div class="row d-flex justify-content-center">
-	<span class="badge badge-secondary mr-1">你需要在最优解用时 <?=$best_limit!=null?"$best_limit s":"N/A"?> 的两倍以内通过本题才能获得满分！</span>
+	<span class="badge badge-secondary mr-1">你需要在最优解用时 <?=$best_limit!=null?"$best_limit ms":"N/A"?> 的两倍以内通过本题才能获得满分！</span>
 	<span class="badge badge-secondary mr-1">时间限制:<?=$time_limit!=null?"$time_limit s":"N/A"?></span>
 	<span class="badge badge-secondary mr-1">空间限制:<?=$memory_limit!=null?"$memory_limit MB":"N/A"?></span>
 </div>

@@ -191,7 +191,7 @@
 			if($submission['used_time'] > 2 * best['used_time']) {
 				// 比赛时就不发私信了，万一是oi赛制就不好了
 				if($submission['score'] == 100 && $submission['contest_id'] == null) {
-					$content = '很遗憾，您的提交 ' . $submission['id'] . ' 的用时超过了最优解的两倍。最优解用时：' . $best['used_time'] . '，您的用时：' . $submission['used_time'] . '。';
+					$content = '很遗憾，您的提交 ' . $submission['id'] . ' 的用时超过了最优解的两倍。最优解用时：' . $best['used_time'] . 'ms，您的用时：' . $submission['used_time'] . 'ms。';
 					sendSystemMsg($submission['submitter'], '被卡常了QWQ', $content);
 				}
 				// TODO: 替换更好的计分方法
