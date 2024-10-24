@@ -211,8 +211,11 @@ EOD
 	$limit = getUOJConf("/var/uoj_data/{$problem['id']}/problem.conf");
 	$time_limit = $limit['time_limit'];
 	$memory_limit = $limit['memory_limit'];
+	$best = DB::selectFirst("select used_time from submissions where problem_id = {$problem['id']} and score == 100 or score is not NULL order by used_time asc limit 1");
+	$best_limit = $best ? $best['used_time'] : null;
 ?>
 <div class="row d-flex justify-content-center">
+	<span class="badge badge-secondary mr-1">你需要在最优解用时 <?=$best_limit!=null?"$best_limit s":"N/A"?> 的两倍以内通过本题才能获得满分！</span>
 	<span class="badge badge-secondary mr-1">时间限制:<?=$time_limit!=null?"$time_limit s":"N/A"?></span>
 	<span class="badge badge-secondary mr-1">空间限制:<?=$memory_limit!=null?"$memory_limit MB":"N/A"?></span>
 </div>
