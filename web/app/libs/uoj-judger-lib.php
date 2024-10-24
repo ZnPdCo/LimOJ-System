@@ -183,4 +183,24 @@
 		
 		DB::update("update problems set ac_num = (select count(*) from submissions where problem_id = problems.id and score = 100), submit_num = (select count(*) from submissions where problem_id = problems.id) where id = $problem_id");
 	}
+
+	function rescorePassSubmissions($problem_id) {
+		$best = DB::selectFirst("select used_time from submissions where problem_id = $problem_id and score >= 90 or score is not NULL order by used_time asc limit 1");
+		$result = DB::query("select id, used_time, submitter, score, contest_id from submissions where problem_id = $problem_id and score >= 90");
+		while ($submission = DB::fetch($result, MYSQLI_ASSOC)) {
+			if($submission['used_time'] > 2 * best['used_time']) {
+				// 比赛时就不发私信了，万一是oi赛制就不好了
+				if($submission['score'] == 100 && $submission['contest_id'] == null) {
+					$content = '很遗憾，您的提交 ' . $submission['id'] . ' 的用时超过了最优解的两倍。最优解用时：' . $best['used_time'] . '，您的用时：' . $submission['used_time'] . '。';
+					sendSystemMsg($submission['submitter'], '被卡常了QWQ', $content);
+				}
+				// TODO: 替换更好的计分方法
+				$score = floor(100 - ($submission['used_time'] / 2.0 * best['used_time'] - 1) * 2);
+				if($score < 90) $score = 90;
+				DB::update("update submissions set score = $score where id = {$submission['id']}");
+			} else {
+				DB::update("update submissions set score = 100 where id = {$submission['id']}");
+			}
+		}
+	}
 ?>

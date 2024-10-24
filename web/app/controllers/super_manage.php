@@ -199,6 +199,7 @@
 				$content = json_decode($submission['content'], true);
 				unlink(UOJContext::storagePath().$content['file_name']);
 				DB::delete("delete from submissions where id = {$submission['id']}");
+				rescorePassSubmissions($submission['problem_id']);
 				updateBestACSubmissions($submission['submitter'], $submission['problem_id']);
 			}
 		}

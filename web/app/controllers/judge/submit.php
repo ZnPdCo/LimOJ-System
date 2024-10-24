@@ -35,7 +35,9 @@
 			if (isset($result["error"])) {
 				DB::update("update submissions set status = '{$result['status']}', result_error = '{$result['error']}', result = '$esc_result', score = null, used_time = null, used_memory = null where id = {$_POST['id']}");
 			} else {
-				DB::update("update submissions set status = '{$result['status']}', result_error = null, result = '$esc_result', score = {$result['score']}, used_time = {$result['time']}, used_memory = {$result['memory']} where id = {$_POST['id']}");
+				// 分数打九折，只有拿到90分以上才会计算用时分
+				$score = floor($result['score'] * 0.9);
+				DB::update("update submissions set status = '{$result['status']}', result_error = null, result = '$esc_result', score = {$score}, used_time = {$result['time']}, used_memory = {$result['memory']} where id = {$_POST['id']}");
 			}
 			
 			if (isset($content['final_test_config'])) {
@@ -48,6 +50,7 @@
 			}
 		}
 		DB::update("update submissions set status_details = '' where id = {$_POST['id']}");
+		rescorePassSubmissions($submission['problem_id']);
 		updateBestACSubmissions($submission['submitter'], $submission['problem_id']);
 	}
 
