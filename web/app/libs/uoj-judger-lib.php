@@ -195,7 +195,7 @@
 					sendSystemMsg($submission['submitter'], '被卡常了QWQ', $content);
 				}
 				// TODO: 替换更好的计分方法
-				$score = floor(100 - ($submission['used_time'] / 2.0 * best['used_time'] - 1) * 2);
+				$score = floor(100 - ($submission['used_time'] / (2.0 * best['used_time']) - 1) * 2);
 				if($score < 90) $score = 90;
 				DB::update("update submissions set score = $score where id = {$submission['id']}");
 			} else {
