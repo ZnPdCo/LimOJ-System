@@ -1,8 +1,8 @@
 <?php
 return [
 	'profile' => [
-		'oj-name' => 'Universal Online Judge',
-		'oj-name-short' => 'UOJ',
+		'oj-name' => 'Limit Online Judge',
+		'oj-name-short' => 'LimOJ',
 		'administrator' => 'root',
 		'admin-email' => 'admin@local_uoj.ac',
 		'QQ-group' => '',
