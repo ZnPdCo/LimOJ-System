@@ -9,6 +9,7 @@ SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 ARG CLONE_ADDFLAG
 
+RUN sed -i 's@/archive.ubuntu.com/@/mirrors.aliyun.com/@g' /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install -y --no-install-recommends gnupg ca-certificates apt-transport-https && \
     apt-get update && \

@@ -7,6 +7,8 @@ LABEL org.opencontainers.image.licenses=MIT
 ARG CLONE_ADDFLAG
 
 ENV DEBIAN_FRONTEND=noninteractive
+
+RUN sed -i 's@/archive.ubuntu.com/@/mirrors.aliyun.com/@g' /etc/apt/sources.list
 RUN dpkg -s gnupg 2>/dev/null || (apt-get update && apt-get install -y gnupg) &&\
 echo "deb http://ppa.launchpad.net/stesie/libv8/ubuntu bionic main" | tee /etc/apt/sources.list.d/stesie-libv8.list && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D858A0DF &&\
 apt-get update && apt-get install -y git vim ntp zip unzip curl wget apache2 libapache2-mod-xsendfile libapache2-mod-php php php-dev php-pear php-zip php-mysql php-mbstring php-gd php-intl php-xsl g++ make re2c libv8-7.5-dev libyaml-dev &&\
